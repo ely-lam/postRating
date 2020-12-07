@@ -1,0 +1,22 @@
+{
+  "name": "postrating",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pandalv9999/postRating.git"
+  },
+  "author": "Rujun Yao",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pandalv9999/postRating/issues"
+  },
+  "homepage": "https://github.com/pandalv9999/postRating#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
