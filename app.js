@@ -2,9 +2,13 @@ const express = require('express');
 
 const app = express();
 
+// app.get("/", (req, res) => {
+//     console.log("sending react homepage");
+//     res.sendFile(__dirname + "/react/build/index.html");
+// });
+
 app.get("/", (req, res) => {
-    console.log("sending react homepage");
-    res.sendFile(__dirname + "/react/build/index.html");
+   res.send("Hello")
 });
 
 //listen to a specific port.
