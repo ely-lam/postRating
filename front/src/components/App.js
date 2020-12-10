@@ -3,8 +3,10 @@ import React, {useState} from "react"
 import '../style/App.css';
 import './LoginForm'
 import './RegisterForm'
+import './Home'
 import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
+import Home from "./Home";
 
 
 
@@ -20,6 +22,7 @@ const App = () => {
         </div>
         {!user && !register && <LoginForm userSetter={setUser} registerSetter={setRegister}/>}
         {register && <RegisterForm/>}
+        {user && <Home user={user}/>}
     </div>
   );
 };

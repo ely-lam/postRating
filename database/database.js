@@ -50,7 +50,22 @@ const myDB = () => {
       console.log("Success!");
       return true;
     };
+
+    database.authenticateUser = async(username) => {
+      console.log(`Authenticating user ${username}`);
+      return await client
+          .db(process.env.database)
+          .collection("users")
+          .findOne({ username: username });
+    };
+
+    database.getAllPosts = async() => {
+      console.log("Getting all posts");
+      return client.db(process.env.database).collection("apts").find({}).toArray();
+    }
+
   });
+
 
   return database;
 };

@@ -2,6 +2,7 @@
 
 const fs = require('fs');
 const MongoClient = require('mongodb').MongoClient;
+const Double = require("mongodb").Double;
 require("dotenv").config();
 
 // initialize the database connecting criteria.
@@ -29,13 +30,34 @@ fs.readFile('./apts.json', (err, data) => {
     }
     console.log("Data Loaded!");
     let apts = JSON.parse(data);
+    let newData = [];
+    // Add more informations, such as comments
+    for (let apt of apts) {
+        let newApts = {
+            images: apt.images,
+            url: apt.url,
+            title: apt['result-title'],
+            price: apt['result-price'] && parseInt(apt['result-price'].replace(/\D/g,'')),
+            housing: apt['housing'] && apt['housing'].split('-')[0] && parseInt((apt['housing'].split('-')[0]).replace(/\D/g,'')),
+            area: apt['housing'] && apt['housing'].split('-')[1] && (apt['housing'].split('-')[1].replace(/\D/g,'').length === 0 ? null
+                : parseInt(apt['housing'].split('-')[1].replace(/\D/g,''))),
+            hood: apt['result-hood'],
+            tags: apt['result-tags'],
+            date: apt['result-date'], // convert to time?
+            body: apt.postingbody,
+            titleTextOnly: apt.titletextonly,
+            address: apt.mapaddress,
+            comments: [],
+            rating: Double(0)
+        };
+        newData.push(newApts);
+    }
     void client.connect(err => {
         if (err) throw err;
-        client.db(process.env.database).collection("apts").insertMany(apts).then(result => {
-            console.log("Data Added to Database")
+        client.db(process.env.database).collection("apts").insertMany(newData).then(result => {
+            console.log("Data Added to Database");
         }, err => console.log(err));
     });
-
 
 });
 
