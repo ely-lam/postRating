@@ -49,7 +49,7 @@ const Home = ( {user} ) => {
             <div>
                 <p><SearchBar apartments={apartments} apartmentsSetter={setPartialApartments} postPerPageSetter={setPostsPerPage}/></p>
                 <p style={{color: "red"}}>{homeMsg}</p>
-                <p>Showing {indexOfFirstPost} - {indexOfLastPost} of total {partialApartments.length} qualified apartments</p>
+                <p>Showing {indexOfFirstPost + 1} - {indexOfLastPost >= partialApartments.length ? partialApartments.length : indexOfLastPost} of total {partialApartments.length} qualified apartments</p>
                 <ul>
                     {currentPosts.map((apartment, index) => { return (<li key={`apartment-${index}`}><ApartmentPreview apartment={apartment} user={user}/></li>)})}
                 </ul>

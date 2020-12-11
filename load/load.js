@@ -41,6 +41,7 @@ fs.readFile('./apts.json', (err, data) => {
             housing: apt['housing'] && apt['housing'].split('-')[0] && parseInt((apt['housing'].split('-')[0]).replace(/\D/g,'')),
             area: apt['housing'] && apt['housing'].split('-')[1] && (apt['housing'].split('-')[1].replace(/\D/g,'').length === 0 ? null
                 : parseInt(apt['housing'].split('-')[1].replace(/\D/g,''))),
+            time: apt['result-date'],
             hood: apt['result-hood'],
             tags: apt['result-tags'],
             date: apt['result-date'], // convert to time?
