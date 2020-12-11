@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios"
 import { useForm } from "react-hook-form";
 
 const LoginForm = ({ userSetter, registerSetter }) => {
@@ -6,7 +7,20 @@ const LoginForm = ({ userSetter, registerSetter }) => {
   const { register, handleSubmit, errors } = useForm();
 
   const onSubmit = (data) => {
-    setErrMsg("Success");
+    const url = "./login";
+    axios.post(url, data).then((res) => {
+        console.log(`User ${res.data.username} Log in success!`);
+        userSetter(res.data);
+    })
+        .catch((error) => {
+            if (error.response.data) {
+                setErrMsg(error.response.data);
+            } else {
+                const msg = "Unexpected Exception occurs";
+                console.log(msg);
+                setErrMsg(msg);
+            }
+        });
   };
   return (
     <div>

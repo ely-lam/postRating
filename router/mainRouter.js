@@ -19,4 +19,17 @@ module.exports = (app, passport, utils,database) => {
         }
     });
 
+    // This router handle the login request. Note that we have change the get request to actual post request.
+    app.post("/login", passport.authenticate("local"), (req, res) => {
+        console.log(`Authenticate user ${req.user.username} success`);
+        res.status(200).json(req.user);
+    });
+
+    // This router handle the logout request.
+    app.get("/logout", utils.checkAuthenticated, (req, res) => {
+        req.logout();
+        console.log("Logout user success!");
+        res.redirect("/");
+    });
+
 };
