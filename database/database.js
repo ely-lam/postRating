@@ -1,4 +1,5 @@
 const MongoClient = require("mongodb").MongoClient;
+const ObjectId = require("mongodb").ObjectId;
 const encrypt = require("bcrypt");
 require("dotenv").config();
 
@@ -37,7 +38,7 @@ const myDB = () => {
         });
 
       if (user) {
-          console.log("User already exists!");
+        console.log("User already exists!");
         return false;
       }
 
@@ -45,27 +46,66 @@ const myDB = () => {
       client.db(process.env.database).collection("users").insertOne({
         username: data.username,
         password: hashedPassword,
+        comments: [],
+        favorites: [],
       });
 
       console.log("Success!");
       return true;
     };
 
-    database.authenticateUser = async(username) => {
+    database.authenticateUser = async (username) => {
       console.log(`Authenticating user ${username}`);
       return await client
-          .db(process.env.database)
-          .collection("users")
-          .findOne({ username: username });
+        .db(process.env.database)
+        .collection("users")
+        .findOne({ username: username });
     };
 
-    database.getAllPosts = async() => {
+    database.getAllPosts = async () => {
       console.log("Getting all posts");
-      return client.db(process.env.database).collection("apts").find({}).toArray();
-    }
+      return client
+        .db(process.env.database)
+        .collection("apts")
+        .find({})
+        .toArray();
+    };
 
+    database.getPost = async (apartmentId) => {
+      console.log(`Getting post for ${apartmentId}`);
+      return client
+        .db(process.env.database)
+        .collection("apts")
+        .findOne({ _id: ObjectId(apartmentId) });
+    };
+
+    database.addComment = async (comment) => {
+      console.log("Adding comments");
+      await client
+        .db(process.env.database)
+        .collection("apts")
+        .updateOne(
+          {
+            _id: ObjectId(comment.apartmentId),
+          },
+          {
+            $push: { comments: comment },
+            $inc: { rating: parseInt(comment.rating) },
+          }
+        );
+      await client
+        .db(process.env.database)
+        .collection("users")
+        .updateOne(
+          {
+            username: comment.username,
+          },
+          {
+            $push: { comments: comment },
+          }
+        );
+    };
   });
-
 
   return database;
 };

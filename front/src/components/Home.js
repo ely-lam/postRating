@@ -29,7 +29,6 @@ const Home = ( {user} ) => {
             if (data.length === 0) {
                 setHomeMsg("There is no apartments loaded");
             } else {
-                console.log(data);
                 console.log("Apartments loaded");
                 setApartments(data);
                 setPartialApartments(data);
@@ -47,7 +46,7 @@ const Home = ( {user} ) => {
     return (
         <div>
             <div>
-                <p><SearchBar apartments={apartments} apartmentsSetter={setPartialApartments} postPerPageSetter={setPostsPerPage}/></p>
+                <SearchBar apartments={apartments} apartmentsSetter={setPartialApartments} postPerPageSetter={setPostsPerPage}/>
                 <p style={{color: "red"}}>{homeMsg}</p>
                 <p>Showing {indexOfFirstPost + 1} - {indexOfLastPost >= partialApartments.length ? partialApartments.length : indexOfLastPost} of total {partialApartments.length} qualified apartments</p>
                 <ul>
