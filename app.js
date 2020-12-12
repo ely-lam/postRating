@@ -3,8 +3,8 @@ const session = require("express-session");
 const passport = require("passport");
 const bodyParser = require("body-parser");
 const mainRouter = require("./router/mainRouter");
-const homeRouter = require("./router/homeRouter");
 const commentRouter = require("./router/commentRouter");
+const userRouter = require("./router/userRouter");
 const database = require("./database/database");
 const utils = require("./router/utils");
 const initializePassport = require("./passport-config");
@@ -37,8 +37,8 @@ app.get("/", (req, res) => {
 
 initializePassport(passport, database);
 mainRouter(app, passport, utils, database);
-homeRouter(app, utils, database);
 commentRouter(app, utils, database);
+userRouter(app, utils, database);
 
 //listen to a specific port.
 app.listen(process.env.PORT || 5000, () => {

@@ -6,7 +6,7 @@ import './RegisterForm'
 import './Home'
 import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
-import Home from "./Home";
+import Navigation from "./Navigation";
 
 
 
@@ -22,7 +22,7 @@ const App = () => {
         </div>
         {!user && !register && <LoginForm userSetter={setUser} registerSetter={setRegister}/>}
         {register && <RegisterForm/>}
-        {user && <Home user={user}/>}
+        {user && <Navigation user={user}/>}
     </div>
   );
 };

@@ -105,6 +105,52 @@ const myDB = () => {
           }
         );
     };
+
+    database.deleteComment = async (comment) => {
+      console.log("Deleting comment");
+      await client
+          .db(process.env.database)
+          .collection("apts")
+          .updateOne(
+              {
+                _id: ObjectId(comment.apartmentId),
+              },
+              {
+                $pull: { comments: comment },
+                $inc: { rating: -parseInt(comment.rating) },
+              }
+          );
+      await client
+          .db(process.env.database)
+          .collection("users")
+          .updateOne(
+              {
+                username: comment.username,
+              },
+              {
+                $pull: { comments: comment },
+              }
+          );
+    }
+
+    database.addFavorite = async (apartment, username) => {
+        console.log("Adding favorite");
+        await client.db(process.env.database).collection("users").updateOne({
+            username: username
+        }, {
+            $push: {favorites: apartment}
+        })
+    };
+
+      database.deleteFavorite = async (apartment, username) => {
+          console.log("Adding favorite");
+          await client.db(process.env.database).collection("users").updateOne({
+              username: username
+          }, {
+              $pull: {favorites: apartment}
+          })
+      }
+
   });
 
   return database;

@@ -22,6 +22,19 @@ module.exports = (app, utils, database) => {
       res.sendStatus(200);
     } catch (err) {
       res.sendStatus(500);
+      throw err;
     }
   });
+
+  app.post("/comments/delete", utils.checkAuthenticated, async (req, res) => {
+    console.log(`Receiving deleting comment request for ${req.body.username}`);
+    try {
+      await database.deleteComment(req.body);
+      console.log(`Deleting comment of ${req.body.username} success!`);
+      res.sendStatus(200);
+    } catch (err) {
+      res.sendStatus(500);
+      throw err;
+    }
+  })
 };
