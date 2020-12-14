@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import axios from "axios"
+import axios from "axios";
 import { useForm } from "react-hook-form";
+import "../style/AuthForm.css";
 
 const LoginForm = ({ userSetter, registerSetter }) => {
   const [errMsg, setErrMsg] = useState("");
@@ -8,23 +9,25 @@ const LoginForm = ({ userSetter, registerSetter }) => {
 
   const onSubmit = (data) => {
     const url = "./login";
-    axios.post(url, data).then((res) => {
+    axios
+      .post(url, data)
+      .then((res) => {
         console.log(`User ${res.data.username} Log in success!`);
         userSetter(res.data);
-    })
-        .catch((error) => {
-            if (error.response.data) {
-                setErrMsg(error.response.data);
-            } else {
-                const msg = "Unexpected Exception occurs";
-                console.log(msg);
-                setErrMsg(msg);
-            }
-        });
+      })
+      .catch((error) => {
+        if (error.response.data) {
+          setErrMsg(error.response.data);
+        } else {
+          const msg = "Unexpected Exception occurs";
+          console.log(msg);
+          setErrMsg(msg);
+        }
+      });
   };
   return (
-    <div>
-      <h1>Sign In</h1>
+    <div className={"AuthContainer"}>
+      <h2>Sign In</h2>
       <form onSubmit={handleSubmit(onSubmit)} className={"AuthForm"}>
         <input
           type={"text"}
@@ -54,7 +57,7 @@ const LoginForm = ({ userSetter, registerSetter }) => {
             required: "Password required",
             validate: (value) =>
               value.length >= 8 ||
-              "Password should contains at least 8 characters"
+              "Password should contains at least 8 characters",
           })}
         />
         {errors.password && (
@@ -63,7 +66,10 @@ const LoginForm = ({ userSetter, registerSetter }) => {
           </p>
         )}
 
-        <button type={"submit"}>Sign in</button>
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <button type={"submit"}>Sign in</button>
+        </div>
+
         <a href="#" onClick={() => registerSetter(true)}>
           Don't have an account? Sign Up
         </a>

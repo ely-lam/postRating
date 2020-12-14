@@ -36,5 +36,5 @@ module.exports = (app, utils, database) => {
       res.sendStatus(500);
       throw err;
     }
-  })
+  });
 };
