@@ -8,7 +8,7 @@
 <a href="https://docs.google.com/presentation/d/18mTwcG_qS0pZXT5Z1GiJv5Hf1oPOAIEGl5CZx9Wyrsc/edit?usp=sharing">Presentation slides</a>
 
 * **Author:**  
-Rujun Yao, Yiman Liu
+Rujun Yao
 <img src="https://github.com/pandalv9999/postRating/blob/main/front/public/sn1.png?raw=true" alt="homepage">
 
 ## About this class
