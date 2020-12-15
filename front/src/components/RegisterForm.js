@@ -1,26 +1,30 @@
 import React, { useState } from "react";
-import axios from 'axios'
+import axios from "axios";
 import { useForm } from "react-hook-form";
+import "../style/AuthForm.css";
 
 const RegisterForm = () => {
   const [errMsg, setErrMsg] = useState("");
   const { register, handleSubmit, errors, watch } = useForm();
 
   const onSubmit = (data) => {
-      const url = "/sign-up";
-      axios.post(url, data).then(res => {
-          console.log("Register Success");
-          setErrMsg("Register Success");
-      }).catch( (error) => {
-          const msg = "Unexpected Exception occurs";
-          console.log(msg);
-          setErrMsg(msg);
+    const url = "/sign-up";
+    axios
+      .post(url, data)
+      .then((res) => {
+        console.log("Register Success");
+        setErrMsg("Register Success");
+      })
+      .catch((error) => {
+        const msg = "Unexpected Exception occurs";
+        console.log(msg);
+        setErrMsg(msg);
       });
   };
 
   return (
-    <div>
-      <h1>Sign Up</h1>
+    <div className={"AuthContainer"}>
+      <h2>Sign Up</h2>
       <form onSubmit={handleSubmit(onSubmit)} className={"AuthForm"}>
         <input
           type={"text"}
@@ -47,34 +51,37 @@ const RegisterForm = () => {
           aria-label={"Password"}
           placeholder={"Password (8 or more characters)"}
           ref={register({
-              required: "Password required",
-              validate: (value) => value.length >= 8 || "Password should contains at least 8 characters"
-          })}/>
-            {errors.password && (
-                <p id="passwordError" style={{ color: "red" }}>
-                    {errors.password.message}
-                </p>)}
-        <input
-            type={"password"}
-            name={"confirm_password"}
-            id={"confirm-password"}
-            aria-label="confirm-password"
-            placeholder="Confirm Password"
-            ref={register({
-                validate: (value) =>
-                    value === watch("password") || "Passwords does not match!"
-            })}
+            required: "Password required",
+            validate: (value) =>
+              value.length >= 8 ||
+              "Password should contains at least 8 characters",
+          })}
         />
-          {errors.confirm_password && (
-              <p style={{ color: "red" }}>{errors.confirm_password.message}</p>
-          )}
-          <button type={"submit"}>Sign up</button>
-          <a href="/">Already has an account? Log in</a>
-          <p style={{ color: "red" }}>
-              {errMsg}
+        {errors.password && (
+          <p id="passwordError" style={{ color: "red" }}>
+            {errors.password.message}
           </p>
+        )}
+        <input
+          type={"password"}
+          name={"confirm_password"}
+          id={"confirm-password"}
+          aria-label="confirm-password"
+          placeholder="Confirm Password"
+          ref={register({
+            validate: (value) =>
+              value === watch("password") || "Passwords does not match!",
+          })}
+        />
+        {errors.confirm_password && (
+          <p style={{ color: "red" }}>{errors.confirm_password.message}</p>
+        )}
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <button type={"submit"}>Sign up</button>
+        </div>
 
-
+        <a href="/">Already has an account? Log in</a>
+        <p style={{ color: "red" }}>{errMsg}</p>
       </form>
     </div>
   );

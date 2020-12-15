@@ -1,0 +1,33 @@
+.pagination-nav {
+  padding: 20px 100px;
+  background-color: white;
+}
+
+.pagination {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.page-item {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  width: 30px;
+  height: 30px;
+  border: 0.1em solid black;
+}
+
+.page-item:hover {
+  color: white;
+  background-color: black;
+}
+
+.page-item a {
+  text-decoration: none;
+  color: black;
+}
+
+.page-item a:hover {
+  color: white;
+}
