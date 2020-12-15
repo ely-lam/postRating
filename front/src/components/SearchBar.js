@@ -86,7 +86,7 @@ const SearchBar = ({ apartments, apartmentsSetter, postPerPageSetter }) => {
           .sort(comparePrice)
           .reverse();
       case "best-worst":
-        return apartments.sort(compareRating).reverse();
+        return apartments.sort(compareRating);
       default:
         return apartments;
     }

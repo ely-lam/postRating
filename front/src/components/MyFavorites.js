@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import ApartmentPreview from "./ApartmentPreview";
 
-const MyFavorites = ({ user }) => {
+const MyFavorites = ({ user, userSetter }) => {
   const [favorites, setFavorites] = useState([]);
   const [msg, setMsg] = useState("");
 
@@ -12,8 +12,6 @@ const MyFavorites = ({ user }) => {
       .get(url)
       .then((result) => {
         const data = result.data;
-        console.log(data);
-        console.log("Favorite Loaded");
         setFavorites(data.favorites);
       })
       .catch((err) => {

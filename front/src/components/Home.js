@@ -5,6 +5,7 @@ import SearchBar from "./SearchBar";
 import Pagination from "./Pagination";
 
 const Home = ({ user }) => {
+  const [currUser, userSetter] = useState(user);
   const [apartments, setApartments] = useState([]);
   const [partialApartments, setPartialApartments] = useState([]);
   const [homeMsg, setHomeMsg] = useState("");
@@ -22,6 +23,19 @@ const Home = ({ user }) => {
 
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
+  };
+
+  const getUser = () => {
+    const url = `./users/get/${user.username}`;
+    axios
+        .get(url)
+        .then((result) => {
+          const data = result.data;
+          userSetter(data);
+        })
+        .catch((err) => {
+          console.log("load favorite failed!");
+        });
   };
 
   const getApartments = () => {
@@ -46,6 +60,7 @@ const Home = ({ user }) => {
   useEffect(() => {
     console.log("Loading apartments");
     getApartments();
+    getUser();
   }, []);
 
   return (
@@ -61,7 +76,7 @@ const Home = ({ user }) => {
           {currentPosts.map((apartment, index) => {
             return (
               <li key={`apartment-${index}`}>
-                <ApartmentPreview apartment={apartment} user={user} />
+                <ApartmentPreview apartment={apartment} user={currUser} userSetter={userSetter} />
               </li>
             );
           })}

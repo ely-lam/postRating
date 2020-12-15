@@ -22,14 +22,14 @@ const Pagination = ({
         {indexOfLastPost >= partialApartments.length
           ? partialApartments.length
           : indexOfLastPost}{" "}
-        of total {partialApartments.length} qualified apartments
+        of qualified apartments
       </p>
       <ul className={"pagination"} style={{ listStyle: "none" }}>
         {pageNumbers.map((number) => (
           <li key={`page-${number}`} className={"page-item"}>
             <a
               onClick={() => paginate(number)}
-              href={"!#"}
+              href={"#"}
               className={"page-link"}
             >
               {number}

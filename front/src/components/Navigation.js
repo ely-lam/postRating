@@ -5,7 +5,8 @@ import MyComments from "./MyComments";
 import "../style/Navigation.css";
 
 const Navigation = ({ user }) => {
-  const [currentModule, setCurrentModule] = useState(<Home user={user} />);
+  const [currUser, userSetter] = useState(user);
+  const [currentModule, setCurrentModule] = useState(<Home user={currUser} />);
   const [currentState, setCurrentState] = useState([true]);
 
   const currentPage = "#";
@@ -29,7 +30,7 @@ const Navigation = ({ user }) => {
           >
             <a
               href={currentPage}
-              onClick={() => setCurrentPage(0, <Home user={user} />)}
+              onClick={() => setCurrentPage(0, <Home user={currUser} />)}
             >
               Home
             </a>
@@ -41,7 +42,7 @@ const Navigation = ({ user }) => {
           >
             <a
               href={currentPage}
-              onClick={() => setCurrentPage(1, <MyFavorites user={user} />)}
+              onClick={() => setCurrentPage(1, <MyFavorites user={currUser} userSetter={userSetter} />)}
             >
               My Favorites
             </a>
@@ -53,7 +54,7 @@ const Navigation = ({ user }) => {
           >
             <a
               href={currentPage}
-              onClick={() => setCurrentPage(2, <MyComments user={user} />)}
+              onClick={() => setCurrentPage(2, <MyComments user={currUser} />)}
             >
               My Comments
             </a>

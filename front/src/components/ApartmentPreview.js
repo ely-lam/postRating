@@ -3,7 +3,7 @@ import axios from "axios";
 import Comments from "./Comments";
 import "../style/ApartmentPreview.css";
 
-const ApartmentPreview = ({ apartment, user }) => {
+const ApartmentPreview = ({ apartment, user, userSetter }) => {
   const [showComments, setShowComments] = useState(false);
   const [userFavList, setUserFavList] = useState(user.favorites);
   const [msg, setMsg] = useState("");
@@ -13,8 +13,10 @@ const ApartmentPreview = ({ apartment, user }) => {
     axios
       .get(url)
       .then((result) => {
+        console.log("refresh favorite");
         const data = result.data;
         setUserFavList(data.favorites);
+        userSetter(data)
       })
       .catch((err) => {
         console.log("load favorites failed!");
