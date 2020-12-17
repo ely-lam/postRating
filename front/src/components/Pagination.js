@@ -1,6 +1,10 @@
 import React from "react";
 import "../style/Pagination.css";
 
+// Really great job with the pagination! May be better to collapse the page numbers just so it doesn't
+// take up so much space at the bottom.
+// Great job changing the number of posts per page too and getting the page numbers at the bottom to correspond.
+
 const Pagination = ({
   postsPerPage,
   totalPosts,
