@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
+// I would organize each comment under the post it was made rather than just a list of all the posts.
+// I like that you can delete the comments, may be good to be able to delete directly from the post page as well
+// I like that you included the post time.
 const MyComments = ({ user }) => {
   const [comments, setComments] = useState([]);
   const [msg, setMsg] = useState("");
