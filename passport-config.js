@@ -1,5 +1,6 @@
 const LocalStrategy = require("passport-local").Strategy;
 const encrypt = require("bcrypt");
+// good job with password encryption, sign up and sign in are very efficient!
 
 const initialize = (passport, database) => {
   // authenticate user with username and password
