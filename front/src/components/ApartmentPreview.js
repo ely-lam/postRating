@@ -66,6 +66,10 @@ const ApartmentPreview = ({ apartment, user, userSetter }) => {
   //     getFavorites();
   // }, []);
 
+//   formatting for the post looks really good; 
+//   sometimes alt text for images that don't load will overlap with other posts, so you may want to somehow collapse the text
+//   or make sure it stays within its respective post border
+//   Also the favorite and comment buttons could be centered in the post body so the whitespace is even around those buttons
   return (
     <React.Fragment>
       <div className={"preview-container"}>
