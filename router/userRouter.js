@@ -1,3 +1,5 @@
+// I like your method of sending the statuses, I had trouble getting this to work for my
+// project but great to see it working on yours!
 module.exports = (app, utils, database) => {
   app.get(
     "/users/get/:username",
