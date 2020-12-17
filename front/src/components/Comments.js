@@ -3,6 +3,8 @@ import {useForm} from "react-hook-form";
 import axios from "axios";
 import "../style/Comments.css"
 
+// I like the way your comments are formatted, and that you have a message for the user
+// when they add a comment/rating or favorite the listing
 const Comments = ({apartment, user}) => {
 
     const {register, handleSubmit, errors} = useForm();
