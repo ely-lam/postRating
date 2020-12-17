@@ -2,6 +2,10 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import "../style/SearchBar.css";
 
+// the search bar looks really good, much like the airbnb one!
+// great sorting criteria and keyword search
+// for searchPlace, the title case should stay consistent so the different criteria
+// are either all upper or lower case
 const SearchBar = ({ apartments, apartmentsSetter, postPerPageSetter }) => {
   const { register, handleSubmit } = useForm();
 
